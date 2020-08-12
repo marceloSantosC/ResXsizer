@@ -1,6 +1,6 @@
 <?php
 
-function ResizeImage(string $filePath, int $extension, $percentage){
+function ResizeImage(string $filePath, $directory, int $extension, $percentage){
     list($old_width, $old_height) = getimagesize($filePath);
     $new_width = $percentage * $old_width;
     $new_height = $percentage * $old_height;
@@ -12,7 +12,7 @@ function ResizeImage(string $filePath, int $extension, $percentage){
     if($extension === 0) {
         $old_image = imagecreatefrompng($filePath);
         imagecopyresampled($new_image, $old_image, 0, 0, 0,
-        0, $new_width, $new_height, $old_width, $old_height);
+            0, $new_width, $new_height, $old_width, $old_height);
 
         $new_path = "resized-img-" . time() . rand(1, 200) . ".png";
 
@@ -24,7 +24,7 @@ function ResizeImage(string $filePath, int $extension, $percentage){
         0, $new_width, $new_height, $old_width, $old_height);
 
         $img_extension = $extension === 1 ? ".jpeg" : ".jpg";
-        $new_path = "resized-img-" . time() . rand(1, 200) . $img_extension;
+        $new_path =  $directory . "resized-img-" . time() . rand(1, 200) . $img_extension;
 
         imagejpeg($new_image, $new_path);
     }

@@ -1,13 +1,10 @@
 <?php
 
 function VerifyImage(string $inputName){
-    $file = isset($_FILES[$inputName]) ? $_FILES[$inputName] : false;
+    $file = $_FILES[$inputName];
 
-    if(!$file) {
-        throw new Exception("A imagem não foi recebida ou contém erros!");
-    } 
     if($file["error"]) {
-            throw new Exception("Error: ". $file["error"]);
+        throw new Exception("Error: ". $file["error"]);
     }
 
     $config = array(
